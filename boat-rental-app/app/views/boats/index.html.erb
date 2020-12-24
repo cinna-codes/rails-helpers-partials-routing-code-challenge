@@ -1,0 +1,8 @@
+<% @boats.each do |boat| %>
+    <p><%= boat.name %> Rentals: </p>
+    <ul>
+    <% boat.rentals.each do |rental| %>
+        <li> <%= rental.display_date_time %> - <%= rental.customer.name %> </li>
+    <% end %>
+    </ul>
+<% end %>

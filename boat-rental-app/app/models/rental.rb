@@ -1,5 +1,5 @@
 class Rental < ApplicationRecord
-    validates :boat_name, :customer_name, :date_time, presence: true
+    validates :date_time, presence: true
     validate :date_time_cannot_be_in_past
     belongs_to :boat
     belongs_to :customer
@@ -21,5 +21,15 @@ class Rental < ApplicationRecord
     def customer_name
         self.customer.name
     end
+
+    def display_date_time
+        self.date_time.strftime("%A, %d %b %Y %l:%M %p")
+    end
+
+    def self.future_rentals
+        self.where('date_time >= ?', DateTime.now )
+    end
+
+    # * Build a custom query method that returns only the rentals taking place in the future (after current datetime) and use this on the Boat index page
 
 end
